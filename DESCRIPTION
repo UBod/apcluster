@@ -1,0 +1,30 @@
+Package: apcluster
+Type: Package
+Title: Affinity Propagation Clustering
+Version: 1.4.6
+Date: 2018-05-14
+Depends: R (>= 3.0.0)
+Imports: Rcpp (>= 0.11.1), methods, Matrix, stats, graphics, grDevices
+Suggests: Biostrings, kebabs (>= 1.5.4), knitr
+Author: Ulrich Bodenhofer, Johannes Palme, Chrats Melkonian, Andreas Kothmeier,
+	Nikola Kostic
+Maintainer: Ulrich Bodenhofer <bodenhofer@bioinf.jku.at>
+Description: Implements Affinity Propagation clustering introduced by Frey and
+	Dueck (2007) <DOI:10.1126/science.1136800>. The algorithms are largely
+        analogous to the 'Matlab' code published by Frey and Dueck.
+        The package further provides leveraged affinity propagation and an
+        algorithm for exemplar-based agglomerative clustering that can also be
+        used to join clusters obtained from affinity propagation. Various
+        plotting functions are available for analyzing clustering results.
+License: GPL (>= 2)
+Collate: AllClasses.R AllGenerics.R access-methods.R coerce-methods.R
+	 show-methods.R labels-methods.R length-methods.R revDend.R
+	 heatmap-methods.R plot-methods.R cutree-methods.R sort-methods.R
+	 aggExCluster-methods.R apcluster-methods.R apclusterL-methods.R
+	 apclusterK-methods.R apclusterDemo.R preferenceRange-methods.R
+	 similarity.R simpleDist.R conversions.R
+URL: http://www.bioinf.jku.at/software/apcluster/
+VignetteBuilder: knitr
+LinkingTo: Rcpp
+LazyLoad: yes
+Repository: CRAN

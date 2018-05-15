@@ -1,0 +1,173 @@
+Change history of package apcluster:
+====================================
+
+Version 1.4.5:
+- loading of suggested Bioconductor packages now performed conditionally
+  to avoid problems on some platforms 
+
+Version 1.4.4:
+- changed dependency to suggested package 'kebabs' to version of
+  at least 1.5.4 for improved interoperability
+- bug fix in as.dendrogram() method with signature 'AggExResult'
+- added discrepancy metric to distance computations and updated
+  src/distanceL.c to new version
+- registered C/C++ subroutines
+- minor change in the vignette template
+- moved NEWS to inst/NEWS
+- added inst/COPYRIGHT
+
+Version 1.4.3:
+- added optional color legend to heatmap plotting; in line with this
+  change, some minor changes to the interface of the heatmap() function
+- corresponding updates of help pages and vignette
+
+Version 1.4.2:
+- switched sequence kernel example in vignette from 'kernlab' to 'kebabs'
+  package
+- workaround to ensure that all apcluster*() methods are able to process
+  'KernelMatrix' objects (cf. 'kebabs' package)
+- replaced data set 'ch22Promoters' by plain text file (FASTA format)
+  in inst/examples
+- bug fix in the heatmap() method
+- vignette engine changed from Sweave to knitr
+
+Version 1.4.1.:
+- fixes in C++ code of sparse affinity propagation
+
+Version 1.4.0:
+- added apcluster() method for sparse similarity matrices;
+  as a consequence, the package now imports the 'Matrix' package
+  and is now also able to handle non-sparse matrix classes
+  defined by the 'Matrix' package. Moreover, similarity functions
+  supplied to the apcluster() method may now also return any
+  matrix type defined by the 'Matrix' package.
+- fix of apcluster() for dense matrices to better support -Inf
+  similarities
+- added apclusterK() method for sparse similarity matrices
+- preferenceRange() is now an S4 generic; re-implementation in
+  C++ to speed up function; changed handling of -Inf similarities
+  for consistency with sparse version
+- added preferenceRange() methods for sparse matrices and dense
+  matrix objects from the 'Matrix' package
+- new conversion methods implemented for converting dense similarity
+  matrices to sparse ones and vice versa; consequently,
+  sparseToFull() is marked as deprecated.
+- adaptation of heatmap() function for improved handling of -Inf
+  similarities
+- adaptations of signatures of '[' and '[[' accessor methods
+- renamed help page of methods for computing similarity matrices
+  to 'similarities' in order to avoid confusion with the accessor
+  method 'similarity'
+- corresponding updates of help pages and vignette
+
+Version 1.3.5:
+- memory access fixes in C++ code called from apclusterL()
+- minor updates of vignette
+
+Version 1.3.4:
+- added sort() function to rearrange clusters according to
+  sort criterion; note that this is an S3 method (see help
+  page for explanation)
+- improvements and bug fixes of apclusterL() method for
+  signature 'matrix,missing'
+- performance optimizations of apcluster() and apclusterL()
+- plotting of clustering results superimposed in scatter plot
+  matrices now also works for 'AggExResult' objects
+- improvements of consistency of error and warning messages 
+- according adaptations of documentation and vignette
+- adapted dependency and linking to Rcpp version 0.11.1
+  (to avoid issues on Mac OS)
+- minor correction of package namespace
+
+Version 1.3.3:
+- adapted dependencies and linking to Rcpp version 0.11.0
+- cleared up package dependencies
+
+Version 1.3.2:
+- plotting of clustering results extended to data sets with more than
+  two dimensions (resulting in the clustering result being superimposed
+  in a scatterplot matrix); the variant that plot() can be used to
+  draw a heatmap has been removed. From now on, heatmap() must always
+  be used.
+- improved NA handling
+- correction of input check in apcluster() and apclusterL() (previously,
+  both functions issued a warning whenever argument p had length > 1)
+- corresponding updates and further improvements of help pages and vignette
+
+Version 1.3.1:
+- re-implementation of heatmap() method: dendrograms can now be plotted
+  even for APResult and ExClust objects as well as for cluster hierarchies
+  based on prior clusterings; color bars can now be switched off and colors
+  can be changed by user (by new 'sideColor' argument); dendrograms can be
+  switched on and off (by 'Rowv' and 'Colv' arguments);
+- added as.hclust() and as.dendrogram() methods
+- added new arguments 'base', 'showSamples', and 'horiz' to the plot() method
+  with signature (x="AggExResult", y="missing"); moreover, parameters for
+  changing the appearance of the height axis are now respected as well
+- streamlining of methods (redundant definition of inherited methods
+  removed)
+- various minor improvements of code and documentation
+
+Version 1.3.0:
+- added Leveraged Affinity Propagation Clustering
+- re-implementation of main functions as S4 generic methods in order to
+  facilitate the convenient internal computation of similarity matrices
+- for convenience, similarity matrices can be stored as part of clustering
+  results
+- heatmap plotting now done by heatmap() which has been defined as S4 generic
+- extended interface to functions for computing similarity matrices
+- added function corSimMat()
+- implementation of length() method for classes APResult, AggExResult, and
+  ExClust
+- added accessor function to extract clustering levels from AggExResult
+  objects
+- correction of exemplars returned by apcluster() for details=TRUE in slot
+  idxAll of returned APResult object
+- when using data stored in a data frame, now categorical columns are
+  explicitly omitted, thereby, avoiding warnings
+- plotting of clustering results along with original data (2D only) has
+  been accelerated
+- all clustering methods now store their calls into the result objects
+- updates and extensions of help pages and vignette
+
+Version 1.2.1:
+- added convenient accessor functions to extracting cluster indices from
+  APResult and ExClust objects
+- added a function for coercing an APResult object into an ExClust object
+- correction of color bar on the left side of heatmaps (default behavior
+  of RowSideColors parameter changed with R 2.15)
+
+Version 1.2.0:
+- reimplementation of apcluster() in C++ using the Rcpp package which reduces
+  computation times by a factor of 9-10
+- obsolete function apclusterLM() removed
+- updates of help pages and vignette
+
+Version 1.1.1:
+- updated citation
+- minor corrections in help pages and vignette
+
+Version 1.1.0:
+- exemplar-based agglomerative clustering (function aggExCluster()) added
+- added various plotting functions, e.g. for dendrograms and heatmaps
+- added sequence analysis example to vignette
+- extension of vignette according to new functionality
+- re-organization of variable names in vignette
+- added option 'verbose' to apclusterK()
+- numerous minor corrections in help pages and vignette
+
+Version 1.0.3:
+- Makefile in inst/doc eliminated to avoid installation problems
+- renamed vignette to "apcluster"
+
+Version 1.0.2:
+- replacement of computation of responsibilities and availabilities in
+  apcluster() by pure matrix operations; traditional implementation according
+  to Frey and Dueck still available as function apclusterLM();
+- improved support for named objects
+- new function for computing label vectors
+- re-organization of package source files and help pages
+
+Version 1.0.1:
+- first public release
+

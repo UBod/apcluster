@@ -1,0 +1,31 @@
+useDynLib(apcluster)
+
+import("methods")
+
+importFrom("graphics",
+           "plot", "axis", "frame", "layout", "legend", "lines",
+           "pairs", "par", "points", "segments", "title")
+
+importFrom("grDevices", "dev.flush", "dev.hold", "rainbow", "heat.colors")
+
+importFrom("stats",
+           "cutree", "heatmap", "as.hclust", "as.dendrogram",
+           "cor", "median", "order.dendrogram", "quantile",
+           "rnorm", "runif")
+
+importFrom("Rcpp", "evalCpp")
+
+import("Matrix")
+
+export("apclusterDemo", "negDistMat", "expSimMat", "corSimMat", "linSimMat",
+       "linKernel", "sparseToFull")
+
+exportClasses("APResult", "AggExResult", "ExClust")
+
+exportMethods("show", "plot", "heatmap", "labels", "cutree", "[", "[[",
+              "similarity", "as.hclust", "as.dendrogram", "length",
+              "apcluster", "apclusterL", "apclusterK", "aggExCluster",
+              "preferenceRange", "as.SparseSimilarityMatrix",
+              "as.DenseSimilarityMatrix")
+
+S3method("sort", "ExClust")

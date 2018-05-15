@@ -1,0 +1,6 @@
+The files src/distanceL.c and R/simpleDist.R are based on the work of others.
+The original files have been copied from the 'stats' package.
+The copyright of the 'stats' package is held by the R Core Team.
+The 'stats' package is distributed as part of the R platform which is
+available under the terms of the Free Software Foundation’s
+GNU General Public License.
