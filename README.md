@@ -11,3 +11,8 @@ This is the source code repository. The package can be installed from
 [CRAN](https://cran.r-project.org/web/packages/apcluster/index.html).
 Further information and installation instructions are also available from
 http://www.bioinf.jku.at/software/apcluster/.
+
+The package is maintained by Ulrich Bodenhofer. The package itself has grown
+over the years in which multiple students have contributed
+significant parts: Johannes Palme, Chrats Melkonian, Andreas Kothmeier, and
+Nikola Kostic
