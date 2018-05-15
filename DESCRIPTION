@@ -24,6 +24,7 @@ Collate: AllClasses.R AllGenerics.R access-methods.R coerce-methods.R
 	 apclusterK-methods.R apclusterDemo.R preferenceRange-methods.R
 	 similarity.R simpleDist.R conversions.R
 URL: http://www.bioinf.jku.at/software/apcluster/
+     https://github.com/UBod/apcluster
 VignetteBuilder: knitr
 LinkingTo: Rcpp
 LazyLoad: yes
