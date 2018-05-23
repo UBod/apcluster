@@ -25,12 +25,12 @@ static const R_CallMethodDef callMethods[] = {
 extern "C"
 {
     void attribute_visible R_init_apcluster(DllInfo *info) {
-        /* Register routines, allocate resources. */
-    R_registerRoutines(info, NULL, callMethods, NULL, NULL);
-    R_useDynamicSymbols(info, FALSE);
+		/* Register routines, allocate resources. */
+	R_registerRoutines(info, NULL, callMethods, NULL, NULL);
+	R_useDynamicSymbols(info, FALSE);
     }
 
     void R_unload_apcluster(DllInfo *info) {
-        /* Release resources. */
+		/* Release resources. */
     }
 }
