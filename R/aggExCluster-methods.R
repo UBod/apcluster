@@ -54,13 +54,6 @@ aggExCluster.matrix <- function(s, x, includeSim=FALSE)
         return(invisible(AggResultObj))
     }
 
-    if (length(AggResultObj@sel) > 0)
-    {
-        colInd <- c(rep(0,nrow(s)))
-        for (i in 1:length(AggResultObj@sel))
-            colInd[AggResultObj@sel[i]] <- i
-    }
-
     objMat <- matrix(NA, K, K) ## matrix of objective values for pairs
     exeMat <- matrix(NA, K, K) ## matrix of joint exemplars
     ## note: only the upper triangle of these matrices is non-NA
@@ -72,128 +65,36 @@ aggExCluster.matrix <- function(s, x, includeSim=FALSE)
     AggResultObj@merge <- matrix(NA, K - 1, 2)
     AggResultObj@height <- rep(0, K - 1)
 
-    ## compute complete matrices before starting joining
-    for (i in 1:(K - 1))
+    res <- .Call("aggExClusterC", s, K, actClust, actExem, objMat, exeMat,
+                  actLabels, AggResultObj@sel, AggResultObj@clusters,
+                  AggResultObj@exemplars, AggResultObj@merge,
+                  AggResultObj@height, as.logical(preserveNames)[1])
+    
+    if (is.element("error", names(res)))
     {
-        for (j in (i + 1):K)
-        {
-            joint <- c(actClust[[i]], actClust[[j]])
-
-            if (length(AggResultObj@sel) > 0)
-            {
-                ci <- colInd[intersect(AggResultObj@sel,joint)]
-                if (length(ci) > 0)
-                {
-                    cM <- colMeans(s[joint,
-                                     colInd[intersect(AggResultObj@sel,joint)],
-                                     drop=FALSE])
-                    ex <- intersect(AggResultObj@sel,joint)[which.max(cM)]
-                    exeMat[i, j] <- ex
-                    objMat[i, j] <-
-                        (mean(s[ex, colInd[intersect(AggResultObj@sel,
-                                                     actClust[[i]])]]) +
-                         mean(s[ex, colInd[intersect(AggResultObj@sel,
-                                                     actClust[[j]])]])) / 2
-                }
-                else
-                {
-                    ## joining not possible - no similarities available
-                    # exeMat[i,j] <- 0
-                    # objMat[i,j] <- -Inf
-                    stop("clusters cannot be joined because of missing ",
-                         "similarity values;\n       maybe increasing the ",
-                         "cluster size through decreasing\n",
-                         "       the self similarity 'p' helps.")
-                }
-            }
-            else
-            {
-                cM <- colMeans(s[joint, joint, drop=FALSE])
-                ex <- joint[which.max(cM)]
-                exeMat[i, j] <- ex
-                objMat[i, j] <- (mean(s[ex, actClust[[i]]]) +
-                                 mean(s[ex, actClust[[j]]])) / 2
-            }
-
-        }
+      if (res$error == 1)
+      {
+        stop("clusters cannot be joined because of missing ",
+             "similarity values;\n       maybe increasing the ",
+             "cluster size through decreasing\n",
+             "       the self similarity 'p' helps.")
+      }
+      else if (res$error == 2)
+      {
+        stop("clusters cannot be joined because of missing ",
+             "similarity values")
+      }
     }
-
-    ## agglomeration loop
-    for (k in (K - 1):1)
-    {
-        tojoin <- which.max(objMat) - 1 ## determine pair to join
-        I <- tojoin %% K + 1
-        J <- floor(tojoin / K) + 1
-
-        newClust <- c(actClust[[I]], actClust[[J]]) ## join them
-        actClust[c(I, J)] <- NULL
-        actClust[[k]] <- newClust
-        actExem <- c(actExem[c(-I, -J)], exeMat[I, J])
-
-        AggResultObj@clusters[[k]] <- actClust
-        AggResultObj@merge[K - k, ] <- c(actLabels[I], actLabels[J])
-        actLabels <- c(actLabels[c(-I, -J)], K - k)
-        AggResultObj@height[K - k] <- objMat[I, J]
-        AggResultObj@exemplars[[k]] <- actExem
-
-        if (preserveNames)
-            names(AggResultObj@exemplars[[k]]) <- colnames(s)[actExem]
-
-        if (k == 1) break
-
-        ## rearrange matrices objMat and exeMat
-        ## put values for unchanged clusters in the first k-1 rows/columns
-        indexVec <- 1:(k + 1)
-        indexVec <- indexVec[c(-I, -J)]
-
-        exeMat[1:(k - 1), 1:(k - 1)] <- exeMat[indexVec, indexVec, drop=FALSE]
-        objMat[1:(k - 1), 1:(k - 1)] <- objMat[indexVec, indexVec, drop=FALSE]
-
-        ## wipe out k+1-st column
-        exeMat[, k + 1] <- NA
-        objMat[, k + 1] <- NA
-
-        ## update k-th column with objective values and joint exemplars of
-        ## unchanged clusters and the newly joined cluster
-        for (i in 1:(k - 1))
-        {
-            joint <- c(actClust[[i]], actClust[[k]])
-
-            if (length(AggResultObj@sel) > 0)
-            {
-                ci <- colInd[intersect(AggResultObj@sel,joint)]
-                if (length(ci) > 0)
-                {
-                    cM <- colMeans(s[joint,
-                                     colInd[intersect(AggResultObj@sel,joint)],
-                                     drop=FALSE])
-                    ex <- intersect(AggResultObj@sel,joint)[which.max(cM)]
-                    exeMat[i, k] <- ex
-                    objMat[i, k] <- (mean(s[ex,
-                                            colInd[intersect(AggResultObj@sel,
-                                                             actClust[[i]])]]) +
-                                     mean(s[ex,
-                                            colInd[intersect(AggResultObj@sel,
-                                                             actClust[[k]])]])) / 2
-                }
-                else
-                {
-                    ## joining not possible - no similarities available
-                    # exeMat[i,j] <- 0
-                    # objMat[i,j] <- -Inf
-                    stop("clusters cannot be joined because of missing ",
-                         "similarity values")
-                }
-            }
-            else
-            {
-                cM <- colMeans(s[joint, joint, drop=FALSE])
-                ex <- joint[which.max(cM)]
-                exeMat[i, k] <- ex
-                objMat[i, k] <- (mean(s[ex, actClust[[i]]]) +
-                                 mean(s[ex, actClust[[k]]])) / 2
-            }
-        }
+    
+    exeMat <- res$exeMat
+    objMat <- res$objMat
+    
+    AggResultObj@merge <- res$merge
+    AggResultObj@height <- res$height
+    AggResultObj@clusters <- res$clusters
+    
+    if (length(AggResultObj@sel) > 0){
+      colInd <- res$colInd
     }
 
     ## finally, determine reordering for dendrogram plotting

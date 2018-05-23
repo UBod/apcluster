@@ -3,6 +3,7 @@
 extern "C"
 {
 #include "distanceL.h"
+#include "aggExClusterC.h"
 }
 
 #include <R.h>
@@ -11,6 +12,7 @@ extern "C"
 
 
 static const R_CallMethodDef callMethods[] = {
+    {"aggExClusterC", (DL_FUNC) &aggExClusterC, 13},
     {"apclusterC", (DL_FUNC) &apclusterC, 5},
     {"apclusterLeveragedC", (DL_FUNC) &apclusterLeveragedC, 5},
     {"apclusterSparseC", (DL_FUNC) &apclusterSparseC, 8},
@@ -23,12 +25,12 @@ static const R_CallMethodDef callMethods[] = {
 extern "C"
 {
     void attribute_visible R_init_apcluster(DllInfo *info) {
-		/* Register routines, allocate resources. */
-	R_registerRoutines(info, NULL, callMethods, NULL, NULL);
-	R_useDynamicSymbols(info, FALSE);
+        /* Register routines, allocate resources. */
+    R_registerRoutines(info, NULL, callMethods, NULL, NULL);
+    R_useDynamicSymbols(info, FALSE);
     }
 
     void R_unload_apcluster(DllInfo *info) {
-		/* Release resources. */
+        /* Release resources. */
     }
 }
