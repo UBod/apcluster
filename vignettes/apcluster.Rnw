@@ -145,7 +145,7 @@ Under special circumstances, e.g. if you want to compile
 the C++ code included in the package with some custom options,
 you may prefer to install the package manually from source.
 To this end, open the package's page at CRAN%
-\footnote{\url{http://cran.r-project.org/web/packages/apcluster/index.html}} and
+\footnote{\url{https://CRAN.R-project.org/package=apcluster}} and
 then proceed as follows:
 \begin{enumerate}
 \item Download \texttt{apcluster\_\APClusterVer.tar.gz}

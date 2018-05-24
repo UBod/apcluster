@@ -10,7 +10,7 @@ used to join clusters obtained from affinity propagation. Various
 plotting functions are available for analyzing clustering results.
 
 This is the source code repository. The package can be installed from
-[CRAN](https://cran.r-project.org/web/packages/apcluster/index.html).
+[CRAN](https://CRAN.R-project.org/package=apcluster).
 Further information and installation instructions are also available from
 http://www.bioinf.jku.at/software/apcluster/.
 
