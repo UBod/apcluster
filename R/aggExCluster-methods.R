@@ -66,24 +66,24 @@ aggExCluster.matrix <- function(s, x, includeSim=FALSE)
     AggResultObj@height <- rep(0, K - 1)
 
     res <- .Call("aggExClusterC", s, K, actClust, actExem, objMat, exeMat,
-                  actLabels, AggResultObj@sel, AggResultObj@clusters,
-                  AggResultObj@exemplars, AggResultObj@merge,
-                  AggResultObj@height, as.logical(preserveNames)[1])
+        actLabels, AggResultObj@sel, AggResultObj@clusters,
+        AggResultObj@exemplars, AggResultObj@merge,
+        AggResultObj@height, as.logical(preserveNames)[1])
     
     if (is.element("error", names(res)))
     {
-      if (res$error == 1)
-      {
-        stop("clusters cannot be joined because of missing ",
-             "similarity values;\n       maybe increasing the ",
-             "cluster size through decreasing\n",
-             "       the self similarity 'p' helps.")
-      }
-      else if (res$error == 2)
-      {
-        stop("clusters cannot be joined because of missing ",
-             "similarity values")
-      }
+        if (res$error == 1)
+        {
+            stop("clusters cannot be joined because of missing ",
+                "similarity values;\n       maybe increasing the ",
+                "cluster size through decreasing\n",
+                "       the self similarity 'p' helps.")
+        }
+        else if (res$error == 2)
+        {
+            stop("clusters cannot be joined because of missing ",
+                "similarity values")
+        }
     }
     
     exeMat <- res$exeMat
@@ -93,13 +93,14 @@ aggExCluster.matrix <- function(s, x, includeSim=FALSE)
     AggResultObj@height <- res$height
     AggResultObj@clusters <- res$clusters
     
-    if (length(AggResultObj@sel) > 0){
-      colInd <- res$colInd
+    if (length(AggResultObj@sel) > 0)
+    {
+        colInd <- res$colInd
     }
 
     ## finally, determine reordering for dendrogram plotting
     AggResultObj@order <- determineOrder(AggResultObj@merge,
-                                         AggResultObj@height, K - 1)
+        AggResultObj@height, K - 1)
 
     AggResultObj@call <- deparse(sys.call(-1))
 
