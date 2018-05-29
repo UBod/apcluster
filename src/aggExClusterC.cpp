@@ -154,7 +154,7 @@ RcppExport SEXP aggExClusterC(SEXP sR, SEXP KR, SEXP actClustR, SEXP actExemR,
         int tojoin = which_max_NoNA(objMat);
 
         int I = tojoin % K;
-        int J = floor(tojoin / K);
+        int J = std::floor(tojoin / K);
         
         IntegerVector newClust = concat(actClust[I], actClust[J]);
         newClust.names() = CharacterVector(newClust);
@@ -218,7 +218,7 @@ RcppExport SEXP aggExClusterC(SEXP sR, SEXP KR, SEXP actClustR, SEXP actExemR,
         // wipe out k+1-st column
         for (int i = 0; i < exeMat.nrow(); i++)
         {
-            exeMat(i, k) = NA_REAL;
+            exeMat(i, k) = NA_INTEGER;
             objMat(i, k) = NA_REAL;
         }
         
