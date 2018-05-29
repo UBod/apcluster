@@ -1,6 +1,9 @@
 Change history of package apcluster:
 ====================================
 
+Version 1.4.7:
+- correction of aggExCluster() C++ code to avoid compilation error on Solaris
+
 Version 1.4.6:
 - aggExCluster() now implemented in C++ instead of R in order to improve
   speed

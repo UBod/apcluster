@@ -1438,6 +1438,10 @@ and extends \verb+sparseToFull()+.
 \section{Change Log}
 
 \begin{description}
+\item[Version 1.4.7:] \hfill
+\begin{itemize}
+\item  correction of \verb+aggExCluster()+ C++ code to avoid compilation error on Solaris
+\end{itemize}
 \item[Version 1.4.6:] \hfill
 \begin{itemize}
 \item  \verb+aggExCluster()+ now implemented in C++ instead of R in order to improve
