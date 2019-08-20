@@ -110,7 +110,7 @@
   Apart from minor adaptations and optimizations, the AP
   clustering functionality of the function \code{apcluster} is 
   largely analogous to Frey's and Dueck's Matlab code
-  (see \url{http://www.psi.toronto.edu/affinitypropagation/}).
+  (see \url{http://genes.toronto.edu/affinitypropagation/}).
 
   The new argument \code{q} allows for better controlling the number of
   clusters without knowing the distribution of similarity

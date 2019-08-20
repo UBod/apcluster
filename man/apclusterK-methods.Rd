@@ -103,7 +103,7 @@
  
   Apart from minor adaptations and optimizations, the implementation is
   largely analogous to Frey's and Dueck's Matlab code
-  (see \url{http://www.psi.toronto.edu/affinitypropagation/}).
+  (see \url{http://genes.toronto.edu/affinitypropagation/}).
 }
 \value{
   Upon successful completion, the function returns a

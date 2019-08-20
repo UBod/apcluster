@@ -92,10 +92,10 @@ have to read introductory literature on these subjects.
 Affinity propagation (AP) is a relatively new clustering algorithm
 that has been introduced by Brendan J.\ Frey and Delbert Dueck
 \cite{FreyDueck07}.\footnotemark[1]\footnotetext[1]{%
-\url{http://www.psi.toronto.edu/affinitypropagation/}}\stepcounter{footnote}
+\url{http://genes.toronto.edu/affinitypropagation/}}\stepcounter{footnote}
 The authors themselves describe affinity propagation as
 follows:\footnote{quoted from
-\url{http://www.psi.toronto.edu/affinitypropagation/faq.html\#def}}
+\url{http://genes.toronto.edu/affinitypropagation/faq.html\#def}}
 
 \begin{quote}
 ``{\em An algorithm that identifies
@@ -1438,6 +1438,12 @@ and extends \verb+sparseToFull()+.
 \section{Change Log}
 
 \begin{description}
+\item[Version 1.4.8:] \hfill
+\begin{itemize}
+\item correction of \verb+aggExCluster()+ C++ code
+\item correction of link to Affinity Propagation website at University of
+  Toronto
+\end{itemize}
 \item[Version 1.4.7:] \hfill
 \begin{itemize}
 \item  correction of \verb+aggExCluster()+ C++ code to avoid compilation error on Solaris

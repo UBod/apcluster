@@ -74,6 +74,7 @@ int which_max_NoNA(NumericVector x)
     return index;
 }
 
+
 RcppExport SEXP aggExClusterC(SEXP sR, SEXP KR, SEXP actClustR, SEXP actExemR,
     SEXP objMatR, SEXP exeMatR, SEXP actLabelsR, SEXP selR, SEXP clustersR,
     SEXP exemplarsR, SEXP mergeR, SEXP heightR, SEXP preserveNamesR)
@@ -156,9 +157,11 @@ RcppExport SEXP aggExClusterC(SEXP sR, SEXP KR, SEXP actClustR, SEXP actExemR,
         int I = tojoin % K;
         int J = std::floor(tojoin / K);
         
-        IntegerVector newClust = concat(actClust[I], actClust[J]);
-        newClust.names() = CharacterVector(newClust);
-
+	IntegerVector newClust = concat(actClust[I], actClust[J]);
+	IntegerVector newClustNM =
+	    MAYBE_REFERENCED(newClust) ? clone(newClust) : newClust;
+	newClust.names() = CharacterVector(newClustNM);
+	
         LogicalVector rem(actClust.length(), true);
         rem[I] = false;
 	rem[J] = false;

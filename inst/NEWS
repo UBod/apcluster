@@ -1,6 +1,11 @@
 Change history of package apcluster:
 ====================================
 
+Version 1.4.8:
+- correction of aggExCluster() C++ code
+- correction of link to Affinity Propagation website at University of
+  Toronto
+
 Version 1.4.7:
 - correction of aggExCluster() C++ code to avoid compilation error on Solaris
 

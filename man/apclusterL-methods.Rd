@@ -121,7 +121,7 @@ control of distance calculation or sample subset selection.
 Apart from minor adaptations and optimizations, the implementation 
 of the function \code{apclusterL}
 is largely analogous to Frey's and Dueck's Matlab code
-(see \url{http://www.psi.toronto.edu/affinitypropagation/}).}
+(see \url{http://genes.toronto.edu/affinitypropagation/}).}
 \value{
   Upon successful completion, both functions returns an
   \code{\linkS4class{APResult}} object.
