@@ -82,12 +82,12 @@ The following slots are defined for \link{ExClust} objects:
 
 \author{Ulrich Bodenhofer, Andreas Kothmeier & Johannes Palme
 \email{apcluster@bioinf.jku.at}}
-\references{\url{http://www.bioinf.jku.at/software/apcluster}
+\references{\url{http://www.bioinf.jku.at/software/apcluster/}
 
 Bodenhofer, U., Kothmeier, A., and Hochreiter, S. (2011)
 APCluster: an R package for affinity propagation clustering.
 \emph{Bioinformatics} \bold{27}, 2463-2464.
-DOI: \href{http://dx.doi.org/10.1093/bioinformatics/btr406}{10.1093/bioinformatics/btr406}.
+DOI: \doi{10.1093/bioinformatics/btr406}.
 }
 \seealso{\code{\link{aggExCluster}}, \code{\link{show-methods}},
   \code{\link{plot-methods}}, \code{\link{labels-methods}},

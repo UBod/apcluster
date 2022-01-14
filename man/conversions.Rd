@@ -58,7 +58,7 @@
   of this format into a \code{\linkS4class{dgTMatrix}} object.
   Note that, for matrices of this format,
   \code{as.DenseSimilarityMatrix} replaces the deprectated function
-  \code{sparseToFull} (see \code{\link{apcluster-deprecated}}).
+  \code{sparseToFull} that was used in older versions of the package.
 
   Note that \code{as.SparseSimilarityMatrix} and
   \code{as.DenseSimilarityMatrix} are no S4 coercion methods.
@@ -68,18 +68,18 @@
 \value{returns a square similarity matrix in sparse format (class
   \code{\linkS4class{dgTMatrix}} or in dense format (standard class
   \code{\link{matrix}}).}
-\author{Ulrich Bodenhofer & Andreas Kothmeier
+\author{Ulrich Bodenhofer
 \email{apcluster@bioinf.jku.at}}
-\references{\url{http://www.bioinf.jku.at/software/apcluster}
+\references{\url{http://www.bioinf.jku.at/software/apcluster/}
 
 Frey, B. J. and Dueck, D. (2007) Clustering by passing messages
 between data points. \emph{Science} \bold{315}, 972-976.
-DOI: \href{http://dx.doi.org/10.1126/science.1136800}{10.1126/science.1136800}.
+DOI: \doi{10.1126/science.1136800}.
 
 Bodenhofer, U., Kothmeier, A., and Hochreiter, S. (2011)
 APCluster: an R package for affinity propagation clustering.
 \emph{Bioinformatics} \bold{27}, 2463-2464.
-DOI: \href{http://dx.doi.org/10.1093/bioinformatics/btr406}{10.1093/bioinformatics/btr406}.
+DOI: \doi{10.1093/bioinformatics/btr406}.
 }
 \examples{
 ## create similarity matrix in sparse format according to Frey and Dueck

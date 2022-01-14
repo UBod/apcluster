@@ -121,23 +121,23 @@ control of distance calculation or sample subset selection.
 Apart from minor adaptations and optimizations, the implementation 
 of the function \code{apclusterL}
 is largely analogous to Frey's and Dueck's Matlab code
-(see \url{http://genes.toronto.edu/affinitypropagation/}).}
+(see \url{https://psi.toronto.edu/research/affinity-propagation-clustering-by-message-passing/}).}
 \value{
   Upon successful completion, both functions returns an
   \code{\linkS4class{APResult}} object.
 }
 \author{Ulrich Bodenhofer, Andreas Kothmeier & Johannes Palme
 \email{apcluster@bioinf.jku.at}}
-\references{\url{http://www.bioinf.jku.at/software/apcluster}
+\references{\url{http://www.bioinf.jku.at/software/apcluster/}
 
 Frey, B. J. and Dueck, D. (2007) Clustering by passing messages
 between data points. \emph{Science} \bold{315}, 972-976.
-DOI: \href{http://dx.doi.org/10.1126/science.1136800}{10.1126/science.1136800}.
+DOI: \doi{10.1126/science.1136800}.
 
 Bodenhofer, U., Kothmeier, A., and Hochreiter, S. (2011)
 APCluster: an R package for affinity propagation clustering.
 \emph{Bioinformatics} \bold{27}, 2463-2464.
-DOI: \href{http://dx.doi.org/10.1093/bioinformatics/btr406}{10.1093/bioinformatics/btr406}.
+DOI: \doi{10.1093/bioinformatics/btr406}.
 }
 \seealso{\code{\linkS4class{APResult}}, \code{\link{show-methods}},
   \code{\link{plot-methods}}, \code{\link{labels-methods}},
