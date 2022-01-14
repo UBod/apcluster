@@ -31,12 +31,6 @@ Linz\\Altenberger Str. 69, 4040 Linz, Austria\\
 options(width=72)
 knitr::opts_knit$set(width=72)
 set.seed(0)
-suggestedPackages <- c("Biostrings", "kebabs")
-if (all(sapply(suggestedPackages, requireNamespace, quietly=TRUE))) {
-    library(kebabs, quietly=TRUE)
-} else {
-    knitr::opts_chunk$set(eval=FALSE)
-}
 library(apcluster, quietly=TRUE)
 apclusterVersion <- packageDescription("apcluster")$Version
 apclusterDateRaw <- packageDescription("apcluster")$Date
@@ -92,10 +86,9 @@ have to read introductory literature on these subjects.
 Affinity propagation (AP) is a relatively new clustering algorithm
 that has been introduced by Brendan J.\ Frey and Delbert Dueck
 \cite{FreyDueck07}.\footnotemark[1]\footnotetext[1]{%
-\url{http://genes.toronto.edu/affinitypropagation/}}\stepcounter{footnote}
+\url{https://psi.toronto.edu/research/affinity-propagation-clustering-by-message-passing/}}\stepcounter{footnote}
 The authors themselves describe affinity propagation as
-follows:\footnote{quoted from
-\url{http://genes.toronto.edu/affinitypropagation/faq.html\#def}}
+follows:
 
 \begin{quote}
 ``{\em An algorithm that identifies
@@ -803,82 +796,20 @@ in the sparse similarity matrix $s$, respectively. The same replacement takes pl
 \verb+aggExCluster()+ converts sparse similarity matrices to dense ones.
 
 
-\section{A Toy Example with Biological Sequences}\label{sec:bioseq}
+\section{Processing Biological Sequences}\label{sec:bioseq}
 
 As noted in the introduction above, one of the goals of this package is
 to leverage affinity propagation in bioinformatics applications.
-In order to demonstrate the usage of the package in a biological application,
-we consider a small toy example here.
-
-The package comes with a toy data set \verb+ch22Promoters+ that consists of
-sub-sequences of promoter regions of 150 random genes from the human
-chromosome no.\ 22
-(according to the human genome assembly hg18). Each sequence
-consists of the 1000 bases upstream of the transcription start site of each
-gene. Suppose we want to cluster these sequences in order to find out whether
-groups of promoters can be identified on the basis of the sequence only and,
-if so, to identify exemplars that are most typical for these groups.
-<<LoadCh22Promoters>>=
-library(Biostrings)
-filepath <- system.file("examples", "ch22Promoters.fasta",
-                        package="apcluster")
-ch22Promoters <- readDNAStringSet(filepath)
-ch22Promoters
-@
-Obviously, these are classical nucleotide sequences, each of which is identified
-by the RefSeq identifier of the gene the promoter sequence stems from.
-
-In order to compute a similarity matrix for this data set, we choose
-(without further justification, just for demonstration purposes) the
-simple {\em spectrum kernel} \cite{LeslieEskinNoble02} with a sub-sequence
-length of $k=6$. We use the implementation from the \KeBABS\ package
-\cite{PalmeHochreiterBodenhofer15} to
-compute the similarity matrix in a convenient way:
-<<SimCh22Promoters>>=
-library(kebabs)
-specK6 <- spectrumKernel(k=6)
-promSim <- getKernelMatrix(specK6, ch22Promoters)
-promSim[1:4, 1:4]
-@
-Now we run affinity propagation on the similarity matrix:
-<<APCh22Promoters>>=
-promAP <- apcluster(promSim, q=0)
-promAP
-@
-So we obtain \Sexpr{length(promAP@exemplars)} clusters in total. The
-corresponding heatmap looks as follows (note that we have to supply the
-similarity matrix, as it is not included by default if \verb+apcluster()+
-is called with the similarity matrix; the reason is that, for large
-data sets, it is more memory-efficient not to make multiple copies of the
-similarity matrix; see also \ref{ssec:memeff}):
-\begin{center}
-<<HeatMapAPCh22Promoters,fig.width=7,fig.height=7,out.width='0.6\\textwidth'>>=
-heatmap(promAP, promSim, Rowv=FALSE, Colv=FALSE)
-@
-\end{center}
-Let us now run agglomerative clustering to further join clusters.
-<<aggExCh22Promoters>>=
-promAgg <- aggExCluster(promSim, promAP)
-@
-The resulting dendrogram is given as follows:
-\begin{center}
-<<DendrogramAPCh22Promoters,fig.width=5,fig.height=5,out.width='0.5\\textwidth'>>=
-plot(promAgg)
-@
-\end{center}
-The dendrogram does not give a very clear indication about the best number of
-clusters. Let us adopt the viewpoint for a moment that 5 clusters are
-reasonable.
-<<ExtractAggCh22Promoters>>=
-prom5 <- cutree(promAgg, k=5)
-prom5
-@
-The final heatmap looks as follows:
-\begin{center}
-<<HeatMap5Ch22Promoters,fig.width=7,fig.height=7,out.width='0.6\\textwidth'>>=
-heatmap(prom5, promSim, Rowv=FALSE, Colv=FALSE)
-@
-\end{center}
+Previous versions of this document showed a toy example of using
+affinity propagation on a set of biological sequences that computed
+a similarity matrix using the
+simple {\em spectrum kernel} \cite{LeslieEskinNoble02} as implemented
+in the \KeBABS\ package \cite{PalmeHochreiterBodenhofer15}.
+This example has been removed in version 1.4.9 in order to avoid
+dependencies to a non-CRAN package. Instead, readers are now refered
+to the vignette of the \KeBABS\ package \cite{PalmeHochreiterBodenhofer15},
+which also includes an example how to use affinity propagation clustering
+on a set of biological sequences.
 
 \section{Similarity Matrices}\label{sec:DistMat}
 
@@ -1167,29 +1098,6 @@ following rules must be obeyed in order to avoid errors and to ensure meaningful
   row and column names in the returned similarity matrix.
 \end{enumerate}
 
-As an example, let us revisit the sequence clustering example presented
-in Section \ref{sec:bioseq}. Let us first define the function that implements
-the similarity measure:
-<<SimFunCh22Promoters>>=
-spectrumK6 <- function(x, sel=NA)
-{
-    if (any(is.na(sel)))
-        s <- getKernelMatrix(specK6, x)
-    else
-        s <- getKernelMatrix(specK6, x, x[sel])
-
-    as(s, "matrix")
-}
-@
-Now we run leveraged affinity propagation on the \verb+ch22Promoters+
-data set using this similarity measure
-<<APCh22Promoters2>>=
-promAPL <- apclusterL(s=spectrumK6, ch22Promoters, frac=0.1, sweeps=10,
-                      p=promAP@p)
-promAPL
-@
-So we obtain \Sexpr{length(promAPL@exemplars)} clusters in total.
-
 \subsection{Defining a custom similarity measure that creates a sparse similarity matrix}
 
 Since Version 1.4.0, similarity matrices may also be sparse (cf.~Section~\ref{sec:sparse}).
@@ -1392,17 +1300,6 @@ For real-world data sets, in particular,
 if they are large, we recommend to use affinity propagation first and then,
 if necessary, to use \verb+aggExCluster()+ to create a cluster hierarchy.
 
-\subsection{Using APCluster in Conjunction with KeBABS}
-
-The example in Section~\ref{sec:bioseq} makes use of the  \KeBABS\ package
-\cite{PalmeHochreiterBodenhofer15}. In previous versions, the two packages
-defined the \verb+heatmap()+ methods as S4 generics in conflicting ways.
-For this reason, the order in which the two packages were loaded mattered,
-and the \verb+heatmap()+ methods of the package that was loaded first
-was no longer available. This conflict has been resolved with \KeBABS\
-development version 1.5.4. The first official release solving this issue was
-1.6.0, which was released as part of Bioconductor 3.3 on May 4, 2016.
-
 \section{Special Notes for Users Upgrading from Previous Versions}
 
 \subsection{Upgrading from a version older than 1.3.0}
@@ -1435,206 +1332,15 @@ The function \verb+sparseToFull()+ has been deprecated. A fully compatible
 function \verb+as.DenseSimilarityMatrix()+ is available that replaces
 and extends \verb+sparseToFull()+.
 
-\section{Change Log}
+\subsection{Upgrading to Version 1.4.9}
 
-\begin{description}
-\item[Version 1.4.8:] \hfill
-\begin{itemize}
-\item correction of \verb+aggExCluster()+ C++ code
-\item correction of link to Affinity Propagation website at University of
-  Toronto
-\end{itemize}
-\item[Version 1.4.7:] \hfill
-\begin{itemize}
-\item  correction of \verb+aggExCluster()+ C++ code to avoid compilation error on Solaris
-\end{itemize}
-\item[Version 1.4.6:] \hfill
-\begin{itemize}
-\item  \verb+aggExCluster()+ now implemented in C++ instead of R in order to improve
-  speed
-\item further correction of conditional loading of package suggested by vignette
-\end{itemize}
-\item[Version 1.4.5:] \hfill
-\begin{itemize}
-\item loading of suggested Bioconductor packages now performed conditionally
-  to avoid problems when building the package on some platforms that do not
-  have the Bioconductor packages installed
-\end{itemize}
-\item[Version 1.4.4:] \hfill
-\begin{itemize}
-\item changed dependency to suggested package \verb+kebabs+ to version of
-  at least 1.5.4 for improved interoperability
-\item bug fix in \verb+as.dendrogram()+ method with signature `\verb+AggExResult+'
-\item added discrepancy metric to distance computations and updated
-  \verb+src/distanceL.c+ to new version
-\item registered C/C++ subroutines
-\item minor change in the vignette template
-\item moved \verb+NEWS+ to \verb+inst/NEWS+
-\item added \verb+inst/COPYRIGHT+
-\end{itemize}
-\item[Version 1.4.3:] \hfill
-\begin{itemize}
-\item added optional color legend to heatmap plotting; in line with this
-  change, some minor changes to the interface of the \verb+heatmap()+ function
-\item corresponding updates of help pages and vignette
-\end{itemize}
-\item[Version 1.4.2:] \hfill
-\begin{itemize}
-\item switched sequence kernel example in vignette from \verb+kernlab+ to \KeBABS\ package
-\item workaround to ensure that all \verb+apcluster*()+ methods are able to process
-  \verb+KernelMatrix+ objects (cf. \KeBABS\ package)
-\item replaced data set \verb+ch22Promoters+ by plain text file (FASTA format)
-  in \verb+inst/examples+
-\item bug fix in the \verb+heatmap()+ method
-\item vignette engine changed from Sweave to knitr
-\end{itemize}
-\item[Version 1.4.1:] \hfill
-\begin{itemize}
-\item fixes in C++ code of sparse affinity propagation
-\end{itemize}
-\item[Version 1.4.0:] \hfill
-\begin{itemize}
-\item added \verb+apcluster()+ method for sparse similarity matrices;
-  as a consequence, the package now imports the \verb+Matrix+ package
-  and is now also able to handle non-sparse matrix classes
-  defined by the \verb+Matrix+ package. Moreover, similarity functions
-  supplied to the \verb+apcluster()+ method may now also return any
-  matrix type defined by the \verb+Matrix+ package.
-\item fix of \verb+apcluster()+ for dense matrices to better support
-  \verb+-Inf+ similarities
-\item added \verb+apclusterK()+ method for sparse similarity matrices
-\item \verb+preferenceRange()+ is now an S4 generic; re-implementation in
-  C++ to speed up function; changed handling of \verb+-Inf+ similarities
-  for consistency with sparse version.
-\item added \verb+preferenceRange()+ methods for sparse matrices and dense
-  matrix objects from the \verb+Matrix+ package.
-\item new conversion methods implemented for converting dense similarity
-  matrices to sparse ones and vice versa; consequently,
-  \verb+sparseToFull()+ is marked as deprecated.
-\item adaptation of \verb+heatmap()+ function for improved handling of
-  \verb+-Inf+ similarities
-\item adaptations of signatures of \verb+[+ and \verb+[[+ accessor methods
-\item renamed help page of methods for computing similarity matrices
-  to `similarities' in order to avoid confusion with the accessor
-  method \verb+similarity()+.
-\item corresponding updates of help pages and vignette
-\end{itemize}
-\item[Version 1.3.5:] \hfill
-\begin{itemize}
-  \item memory access fixes in C++ code called from \verb+apclusterL()+
-  \item minor updates of vignette
-\end{itemize}
-\item[Version 1.3.4:] \hfill
-\begin{itemize}
-  \item added \verb+sort()+ function to rearrange clusters according to
-    sort criterion; note that this is an S3 method (see help
-    page for explanation)
-  \item improvements and bug fixes of \verb+apclusterL()+ method for
-    signature (\verb+s="matrix"+, \verb+x="missing"+)
-  \item performance optimizations of \verb+apcluster()+ and \verb+apclusterL()+
-  \item plotting of clustering results superimposed in scatter plot
-    matrices now also works for `\verb+AggExResult+' objects
-  \item improvements of consistency of error and warning messages
-  \item according adaptations of documentation and vignette
-  \item adapted dependency and linking to Rcpp version 0.11.1
-    (to avoid issues on Mac OS)
-  \item minor correction of package namespace
-\end{itemize}
-\item[Version 1.3.3:] \hfill
-\begin{itemize}
-  \item adapted dependencies and linking to Rcpp version 0.11.0
-  \item cleared up package dependencies
-\end{itemize}
-\item[Version 1.3.2:] \hfill
-\begin{itemize}
-  \item plotting of clustering results extended to data sets with more than
-  two dimensions (resulting in the clustering result being superimposed
-  in a scatterplot matrix); the variant that \verb+plot()+ can be used to
-  draw a heatmap has been removed. From now on, \verb+heatmap()+ must always
-  be used.
-  \item improved \verb+NA+ handling
-  \item correction of input check in \verb+apcluster()+ and \verb+apclusterL()+
-    (previously, both functions issued a warning whenever argument \verb+p+ had length $> 1$)
-  \item corresponding updates and further improvements of help pages and vignette
-\end{itemize}
-\item[Version 1.3.1:] \hfill
-  \begin{itemize}
-  \item re-implementation of \verb+heatmap()+ method: dendrograms can now be plotted
-  even for \verb+APResult+ and \verb+ExClust+ objects as well as for cluster hierarchies
-  based on prior clusterings; color bars can now be switched off and colors
-  can be changed by user (by new \verb+sideColor+ argument); dendrograms can be
-  switched on and off (by \verb+Rowv+ and \verb+Colv+ arguments);
-  \item added \verb+as.hclust()+ and \verb+as.dendrogram()+ methods
-  \item added new arguments \verb+base+, \verb+showSamples+, and \verb+horiz+to the \verb+plot()+
-    method with signature (\verb+x="AggExResult"+, \verb+y="missing"+); moreover, parameters for
-    changing the appearance of the height axis are now respected as well
-  \item streamlining of methods (redundant definition of inherited methods removed)
-  \item various minor improvements of code and documentation
-  \end{itemize}
-\item[Version 1.3.0:] \hfill
-  \begin{itemize}
-  \item added Leveraged Affinity Propagation Clustering
-  \item re-implementation of main functions as S4 generic methods in order to
-    facilitate the convenient internal computation of similarity matrices
-  \item for convenience, similarity matrices can be stored as part of clustering
-    results
-  \item heatmap plotting now done by \verb+heatmap()+ which has been
-    defined as S4 generic
-  \item extended interface to functions for computing similarity matrices
-  \item added function \verb+corSimMat()+
-  \item implementation of \verb+length()+ method for classes \verb+APResult+,
-    \verb+AggExResult+, and \verb+ExClust+
-  \item added accessor function to extract clustering levels from
-    \verb+AggExResult+ objects
-  \item correction of exemplars returned by \APCluster\ for
-    \verb+details=TRUE+ in slot \verb+idxAll+ of returned \verb+APResult+ object
-  \item when using data stored in a data frame, categorical
-    columns are now explicitly omitted, thereby, avoiding warnings
-  \item all clustering methods now store their calls into the result objects
-  \item updates and extensions of help pages and vignette
-  \end{itemize}
-\item[Version 1.2.0:] \hfill
-  \begin{itemize}
-  \item reimplementation of \verb+apcluster()+ in C++ using the
-    Rcpp package \cite{EddelbuettelFrancois11} which reduces
-    computation times by a factor of 9-10
-  \item obsolete function \verb+apclusterLM()+ removed
-  \item updates of help pages and vignette
-  \end{itemize}
-\item[Version 1.1.1:] \hfill
-  \begin{itemize}
-  \item updated citation
-  \item minor corrections in help pages and vignette
-  \end{itemize}
-\item[Version 1.1.0:] \hfill
-  \begin{itemize}
-  \item added exemplar-based agglomerative clustering function
-  \verb+aggExCluster()+
-  \item added various plotting functions for dendrograms and heatmaps
-  \item extended help pages and vignette according to new functionality
-  \item added sequence analysis example to vignette along with data set
-    \verb+ch22Promoters+
-  \item re-organization of variable names in vignette
-  \item added option \verb+verbose+ to \verb+apclusterK()+
-  \item numerous minor corrections in help pages and vignette
-  \end{itemize}
-\item[Version 1.0.3:] \hfill
-  \begin{itemize}
-  \item Makefile in \verb+inst/doc+ eliminated to avoid installation problems
-  \item renamed vignette to ``\verb+apcluster.Rnw+''
-  \end{itemize}
-\item[Version 1.0.2:] \hfill
-  \begin{itemize}
-  \item replacement of computation of responsibilities
-  and availabilities in function \verb+apcluster()+ by pure matrix operations
-  (see \ref{ssec:perf} above); traditional implementation \`a la
-  Frey and Dueck still available as function \verb+apclusterLM+;
-  \item improved support for named objects (see \ref{ssec:names})
-  \item new function for computing label vectors (see \ref{ssec:labels})
-  \item re-organization of package source files and help pages
-  \end{itemize}
-\item[Version 1.0.1:] first official release, released March 2, 2010
-\end{description}
+The function \verb+sparseToFull()+ that has been deprecated since version 1.4.0
+has finally been removed completely. From now on, you really must use the
+function \verb+as.DenseSimilarityMatrix()+ that replaces
+and extends \verb+sparseToFull()+.
+
+Since the dependency to the \KeBABS\ package has been removed, the example file
+\verb+inst/examples/ch22Promoters.fasta+ has been removed, too.
 
 \section{How to Cite This Package}
 
