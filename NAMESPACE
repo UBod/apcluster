@@ -18,7 +18,7 @@ importFrom("Rcpp", "evalCpp")
 import("Matrix")
 
 export("apclusterDemo", "negDistMat", "expSimMat", "corSimMat", "linSimMat",
-       "linKernel", "sparseToFull")
+       "linKernel")
 
 exportClasses("APResult", "AggExResult", "ExClust")
 

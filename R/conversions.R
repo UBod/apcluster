@@ -1,11 +1,3 @@
-sparseToFull <- function(s, fill=-Inf)
-{
-    .Deprecated("as.DenseSimilarityMatrix")
-
-    as.DenseSimilarityMatrix(s=s, fill=fill)
-}
-
-
 as.SparseSimilarityMatrix.matrix <- function(s, lower=-Inf)
 {
     if (!is(s, "matrix"))

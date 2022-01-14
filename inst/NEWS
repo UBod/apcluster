@@ -1,6 +1,19 @@
 Change history of package apcluster:
 ====================================
 
+Version 1.4.9:
+- removed dependency to 'kebas' by rewriting the corresponding section of
+  the vignette; consequently, the file inst/examples/ch22Promoters.fasta
+  was also removed, since it is no longer needed
+- finally removed function sparseToFull() that has been deprecated since
+  version 1.4.0
+- correction of link to Affinity Propagation website at University of
+  Toronto
+- DOIs corrected in help pages (therefore, the package now requires
+  R version >= 3.3.0)
+- some further URLs corrected in help pages
+- removed change history from package vignette for easier maintenance
+
 Version 1.4.8:
 - correction of aggExCluster() C++ code
 - correction of link to Affinity Propagation website at University of
