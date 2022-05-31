@@ -66,10 +66,12 @@ The following slots are defined for \link{ExClust} objects:
 \section{Accessors}{
   In the following code snippets, \code{x} is an \code{ExClust} object.
   \describe{
-    \item{}{\code{x[[i]]}: Returns the i-th cluster as a list of indices
+    \item{[[}{\code{signature(x="ExClust", i="index", j="missing")}:
+      \code{x[[i]]} returns the i-th cluster as a list of indices
       of samples belonging to the i-th cluster.
     }
-    \item{}{\code{x[i]}: Returns a list of integer vectors with the
+    \item{[}{\code{signature(x="ExClust", i="index", j="missing",
+      drop="missing")}: \code{x[i]} returns a list of integer vectors with the
       indices  of samples belonging to this cluster. The list has as
       many components as the argument \code{i} has elements. A list is
       returned even if \code{i} is a single integer.

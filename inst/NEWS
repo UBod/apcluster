@@ -1,6 +1,9 @@
 Change history of package apcluster:
 ====================================
 
+Version 1.4.10:
+- minor corrections of some help pages
+
 Version 1.4.9:
 - removed dependency to 'kebas' by rewriting the corresponding section of
   the vignette; consequently, the file inst/examples/ch22Promoters.fasta

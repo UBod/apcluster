@@ -78,11 +78,13 @@ The following slots are defined for \link{AggExResult} objects:
 \section{Accessors}{
   In the following code snippets, \code{x} is an \code{AggExResult} object.
   \describe{
-    \item{}{\code{x[[i]]}: Returns an object of class
+    \item{[[}{\code{signature(x="AggExResult", i="index", j="missing")}:
+      \code{x[[i]]} returns an object of class
       \code{\linkS4class{ExClust}} corresponding to the clustering level
       with \code{i} clusters; synonymous to \code{\link{cutree}(x, i)}.
     }
-    \item{}{\code{x[i]}: Returns a list of \code{\linkS4class{ExClust}}
+    \item{[}{\code{signature(x="AggExResult", i="index", j="missing",
+      drop="missing")}: \code{x[i]} returns a list of \code{\linkS4class{ExClust}}
       objects with all clustering levels specified in vector \code{i}.
       So, the list has as many components as the argument \code{i} has
       elements. A list is returned even if \code{i} is a single level.

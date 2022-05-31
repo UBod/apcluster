@@ -1,8 +1,8 @@
 Package: apcluster
 Type: Package
 Title: Affinity Propagation Clustering
-Version: 1.4.9
-Date: 2022-01-14
+Version: 1.4.10
+Date: 2022-05-31
 Depends: R (>= 3.3.0)
 Imports: Rcpp (>= 0.11.1), methods, Matrix, stats, graphics, grDevices
 Suggests: knitr
