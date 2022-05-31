@@ -135,7 +135,7 @@ apclusterK.otherSparse <- function(s, x, K, ...)
 {
     s <- try(as(as(s, "TsparseMatrix"), "dgTMatrix"))
 
-    if (class(s) == "try-error")
+    if (is(s, "try-error"))
         stop("cannot cast 's' (class '", class(s), "') to class 'dgTMatrix'")
 
     apclusterK.matrixOrDgT(s=s, K=K, ...)
@@ -149,7 +149,7 @@ apclusterK.otherDense <- function(s, x, K, ...)
 {
     s <- try(as(s, "matrix"))
 
-    if (class(s) == "try-error")
+    if (is(s, "try-error"))
         stop("cannot cast 's' (class '", class(s), "') to class 'matrix'")
 
     apclusterK.matrixOrDgT(s=s, K=K, ...)

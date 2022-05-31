@@ -2,6 +2,7 @@ Change history of package apcluster:
 ====================================
 
 Version 1.4.10:
+- minor correction of exception handling in some R methods
 - minor corrections of some help pages
 
 Version 1.4.9:

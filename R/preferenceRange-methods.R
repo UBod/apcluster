@@ -42,7 +42,7 @@ preferenceRange.otherSparse <- function(s, exact=FALSE)
 {
     s <- try(as(as(s, "TsparseMatrix"), "dgTMatrix"))
 
-    if (class(s) == "try-error")
+    if (is(s, "try-error"))
         stop("cannot cast 's' (class '", class(s), "') to class 'dgTMatrix'")
 
     preferenceRange.dgTMatrix(s=s, exact=exact)
@@ -56,7 +56,7 @@ preferenceRange.otherDense <- function(s, exact=FALSE)
 {
     s <- try(as(s, "matrix"))
 
-    if (class(s) == "try-error")
+    if (is(s, "try-error"))
         stop("cannot cast 's' (class '", class(s), "') to class 'matrix'")
 
     preferenceRange.matrix(s=s, exact=exact)

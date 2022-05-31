@@ -4,7 +4,7 @@ as.SparseSimilarityMatrix.matrix <- function(s, lower=-Inf)
     {
         s <- try(as(s, "matrix"))
 
-        if (class(s) == "try-error")
+        if (is(s, "try-error"))
             stop("cannot cast 's' (class '", class(s), "') to class 'matrix'")
     }
 
@@ -73,7 +73,7 @@ as.SparseSimilarityMatrix.sparseMatrix <- function(s, lower=-Inf)
     {
         s <- try(as(as(s, "TsparseMatrix"), "dgTMatrix"))
 
-        if (class(s) == "try-error")
+        if (is(s, "try-error"))
             stop("cannot cast 's' (class '", class(s),
                  "') to class 'dgTMatrix'")
     }
@@ -101,7 +101,7 @@ as.DenseSimilarityMatrix.matrix <- function(s, fill=-Inf)
     {
         s <- try(as(s, "matrix"))
 
-        if (class(s) == "try-error")
+        if (is(s, "try-error"))
             stop("cannot cast 's' (class '", class(s), "') to class 'matrix'")
     }
 
@@ -139,7 +139,7 @@ as.DenseSimilarityMatrix.sparseMatrix <- function(s, fill=-Inf)
     {
         s <- try(as(as(s, "TsparseMatrix"), "dgTMatrix"))
 
-        if (class(s) == "try-error")
+        if (is(s, "try-error"))
             stop("cannot cast 's' (class '", class(s),
                  "') to class 'dgTMatrix'")
     }

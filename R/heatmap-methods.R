@@ -61,7 +61,7 @@ heatmap.ExClust.Matrix <- function(x, y, ...)
 {
     y <- try(as(y, "matrix"))
 
-    if (class(y) == "try-error")
+    if (is(y, "try-error"))
         stop("cannot cast 'y' (class '", class(y), "') to class 'matrix'")
 
     return(invisible(heatmap(x, y, ...)))
