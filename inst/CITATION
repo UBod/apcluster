@@ -1,10 +1,10 @@
 citHeader("To cite package 'apcluster' in publications use:")
 
-citEntry(entry="Article",
+bibentry(bibtype="Article",
          title="APCluster: an R package for affinity propagation clustering",
-         author=personList(as.person("Ulrich Bodenhofer"),
-                           as.person("Andreas Kothmeier"),
-                           as.person("Sepp Hochreiter")),
+         author=c(person("Ulrich", "Bodenhofer"),
+                  person("Andreas", "Kothmeier"),
+                  person("Sepp", "ochreiter")),
          journal="Bioinformatics",
          year="2011",
          volume="27",
@@ -15,10 +15,10 @@ citEntry(entry="Article",
                    "APCluster: an R package for affinity propagation clustering",
                    "Bioinformatics 27:2463-2464. DOI: 10.1093/bioinformatics/btr406."))
 
-citEntry(entry="Article",
+bibentry(bibtype="Article",
          title="Clustering by passing messages between data points",
-         author=personList(as.person("Brendan J. Frey"),
-                           as.person("Delbert Dueck")),
+         author=c(person(c("Brendan", "J."), "Frey"),
+                  person("Delbert", "Dueck")),
          journal="Science",
          volume="315",
          pages="972--977",

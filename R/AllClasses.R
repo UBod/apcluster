@@ -1,3 +1,9 @@
+# auxiliary class that allows for classical matrices and matrices from the
+# 'Matrix' package; note that, previously the class 'mMatrix' was used
+setClassUnion("AnyMatrix",
+              members = c("matrix", "Matrix"))
+
+
 # S4 class definition for exemplar-based clustering
 setClass("ExClust",
     representation = representation
@@ -7,7 +13,7 @@ setClass("ExClust",
         exemplars = "numeric",
         clusters  = "list",
         idx       = "numeric",
-        sim       = "mMatrix",
+        sim       = "AnyMatrix",
         call      = "character"
     ),
     prototype = prototype

@@ -187,7 +187,7 @@ apclusterK.function <- function(s, x, K, prc=10, bimaxit=20, exact=FALSE,
 
     sim <- s(x=x, ...)
 
-    if (!is(sim, "mMatrix") || (nrow(sim) != N) || ncol(sim) != N)
+    if (!is(sim, "AnyMatrix") || (nrow(sim) != N) || ncol(sim) != N)
         stop("computation of similarity matrix failed")
 
     apres <- apclusterK(s=sim, K=K, prc=prc, bimaxit=bimaxit, exact=exact,

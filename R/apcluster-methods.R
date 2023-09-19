@@ -221,7 +221,7 @@ apcluster.function <- function(s, x, p=NA, q=NA, maxits=1000, convits=100,
 
     sim <- s(x=x, ...)
 
-    if (!is(sim, "mMatrix") || (nrow(sim) != N) || ncol(sim) != N)
+    if (!is(sim, "AnyMatrix") || (nrow(sim) != N) || ncol(sim) != N)
         stop("computation of similarity matrix failed")
 
     apres <- apcluster(s=sim, p=p, q=q, maxits=maxits, convits=convits, lam=lam,
