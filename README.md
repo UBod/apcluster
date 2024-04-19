@@ -24,6 +24,9 @@ install.packages("apcluster")
 ```
 into your R session. If, for what reason ever, you prefer to install the package manually, follow the instructions in the [user manual](https://cran.r-project.org/web/packages/apcluster/vignettes/rococo.pdf).
 
+## Webinar "Introduction to apcluster"
+
+On June 13, 2013, the maintainer of the package, Ulrich Bodenhofer, gave a webinar on the apcluster package. The webinar was hosted by the Orange County R User Group and moderated by its president, Ray DiGiacomo, Jr. The demo uses Version 1.3.2 of the package (released June 11, 2013). Link to recorded video of webinar: [YouTube Video](https://youtu.be/tvXLxhQItDw?si=YNl99Hk7pKlT9ybD)(length: 59:17)
 
 ## User support
 
