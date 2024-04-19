@@ -1,6 +1,10 @@
 Change history of package apcluster:
 ====================================
 
+Version 1.4.12:
+- changed e-mail address of maintainer
+- updated README.md and formatting of package vignette
+
 Version 1.4.11:
 - internal fix regarding a non-stable use of a class internally defined in the
   'Matrix' package

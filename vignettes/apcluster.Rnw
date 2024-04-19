@@ -1,4 +1,4 @@
-\documentclass[article]{bioinf}
+\documentclass{ubmanual}
 
 \usepackage{amsmath,amssymb}
 \usepackage{hyperref}
@@ -10,10 +10,12 @@
 
 \title{{\Huge APCluster}\\[5mm]
   An R Package for Affinity Propagation Clustering}
-\author{Ulrich Bodenhofer, Johannes Palme, Chrats Melkonian, and Andreas Kothmeier}
-\affiliation{Institute of Bioinformatics, Johannes Kepler University
-Linz\\Altenberger Str. 69, 4040 Linz, Austria\\
-\email{apcluster@bioinf.jku.at}}
+\author{Ulrich Bodenhofer\affilmark{1,2}, Johannes Palme\affilmark{2}, Chrats Melkonian\affilmark{2}, and Andreas Kothmeier\affilmark{2}}
+\affiliation{\affilmark{1} School of Informatics, Communication and Media\\
+University of Applied Sciences Upper Austria\\
+Softwarepark 11, 4232 Hagenberg, Austria\\[2mm]
+{\grey\affilmark{2} previously with: Institute of Bioinformatics,
+Johannes Kepler University\\Altenberger Str.\ 69, 4040 Linz, Austria}}
 
 \newcommand{\APCluster}{\texttt{apcluster}}
 \newcommand{\KeBABS}{\texttt{kebabs}}
@@ -43,7 +45,7 @@ apclusterDate <- paste(month.name[apclusterDateMonth], " ",
 @
 \newcommand{\APClusterVer}{\Sexpr{apclusterVersion}}
 \newcommand{\APClusterDate}{\Sexpr{apclusterDate}}
-\manualtitlepage[Version \APClusterVer, \APClusterDate]
+\manualtitlepage{Version \APClusterVer, \APClusterDate}{https://github.com/UBod/apcluster/}
 
 \section*{Scope and Purpose of this Document}
 
