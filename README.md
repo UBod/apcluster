@@ -22,7 +22,7 @@ The package can be installed from
 ```
 install.packages("apcluster")
 ```
-into your R session. If, for what reason ever, you prefer to install the package manually, follow the instructions in the [user manual](https://cran.r-project.org/web/packages/apcluster/vignettes/rococo.pdf).
+into your R session. If, for what reason ever, you prefer to install the package manually, follow the instructions in the [user manual](https://cran.r-project.org/package=apcluster/vignettes/apcluster.pdf).
 
 ## Webinar "Introduction to apcluster"
 
