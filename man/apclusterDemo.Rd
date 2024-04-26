@@ -37,9 +37,8 @@ distributed data - all clusters found must be random artefacts.
   \code{\linkS4class{APResult}} object with the clustering results (see
   examples below).
 }
-\author{Ulrich Bodenhofer, Andreas Kothmeier & Johannes Palme
-\email{apcluster@bioinf.jku.at}}
-\references{\url{http://www.bioinf.jku.at/software/apcluster/}
+\author{Ulrich Bodenhofer, Johannes Palme, and Johannes Palme}
+\references{\url{https://github.com/UBod/apcluster}
 
 Frey, B. J. and Dueck, D. (2007) Clustering by passing messages
 between data points. \emph{Science} \bold{315}, 972-976.

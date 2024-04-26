@@ -22,9 +22,8 @@ clustering. Further functions are implemented to visualize the
 results and to create distance matrices.
 }
 \author{Ulrich Bodenhofer, Andreas Kothmeier, Johannes Palme,
-  Chrats Melkonian & Nikola Kostic
-\email{apcluster@bioinf.jku.at}}
-\references{\url{http://www.bioinf.jku.at/software/apcluster/}
+  Chrats Melkonian, and Nikola Kostic}
+\references{\url{https://github.com/UBod/apcluster}
 
 Bodenhofer, U., Kothmeier, A., and Hochreiter, S. (2011)
 APCluster: an R package for affinity propagation clustering.

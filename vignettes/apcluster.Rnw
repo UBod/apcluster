@@ -45,7 +45,7 @@ apclusterDate <- paste(month.name[apclusterDateMonth], " ",
 @
 \newcommand{\APClusterVer}{\Sexpr{apclusterVersion}}
 \newcommand{\APClusterDate}{\Sexpr{apclusterDate}}
-\manualtitlepage{Version \APClusterVer, \APClusterDate}{https://github.com/UBod/apcluster/}
+\manualtitlepage{Version \APClusterVer, \APClusterDate}{https://github.com/UBod/apcluster}
 
 \section*{Scope and Purpose of this Document}
 

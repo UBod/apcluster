@@ -4,7 +4,7 @@ bibentry(bibtype="Article",
          title="APCluster: an R package for affinity propagation clustering",
          author=c(person("Ulrich", "Bodenhofer"),
                   person("Andreas", "Kothmeier"),
-                  person("Sepp", "ochreiter")),
+                  person("Sepp", "Hochreiter")),
          journal="Bioinformatics",
          year="2011",
          volume="27",
@@ -29,5 +29,5 @@ bibentry(bibtype="Article",
                    "Clustering by passing messages between data",
                    "points. Science 315:972-977. DOI: 10.1126/science.1136800."))
 
-citFooter("To obtain the references in BibTex format, enter",
+citFooter("To obtain the references in BibTeX format, enter",
           "'toBibtex(citation(\"apcluster\"))'")

@@ -82,9 +82,8 @@ The following slots are defined for \link{ExClust} objects:
   }
 }
 
-\author{Ulrich Bodenhofer, Andreas Kothmeier & Johannes Palme
-\email{apcluster@bioinf.jku.at}}
-\references{\url{http://www.bioinf.jku.at/software/apcluster/}
+\author{Ulrich Bodenhofer, Andreas Kothmeier, and Johannes Palme}
+\references{\url{https://github.com/UBod/apcluster}
 
 Bodenhofer, U., Kothmeier, A., and Hochreiter, S. (2011)
 APCluster: an R package for affinity propagation clustering.

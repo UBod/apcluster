@@ -43,9 +43,8 @@
   of which is the maximal input prefence (which would lead to as many
   clusters as data samples).
 }
-\author{Ulrich Bodenhofer & Andreas Kothmeier
-\email{apcluster@bioinf.jku.at}}
-\references{\url{http://www.bioinf.jku.at/software/apcluster/}
+\author{Ulrich Bodenhofer and Andreas Kothmeier}
+\references{\url{https://github.com/UBod/apcluster}
 
 Frey, B. J. and Dueck, D. (2007) Clustering by passing messages
 between data points. \emph{Science} \bold{315}, 972-976.

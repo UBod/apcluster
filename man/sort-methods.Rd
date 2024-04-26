@@ -63,9 +63,8 @@
   \code{clusters} (see \code{\linkS4class{APResult}}
   or \code{\linkS4class{ExClust}}) reordered.
 }
-\author{Ulrich Bodenhofer
-\email{apcluster@bioinf.jku.at}}
-\references{\url{http://www.bioinf.jku.at/software/apcluster/}
+\author{Ulrich Bodenhofer}
+\references{\url{https://github.com/UBod/apcluster}
 
 Bodenhofer, U., Kothmeier, A., and Hochreiter, S. (2011)
 APCluster: an R package for affinity propagation clustering.

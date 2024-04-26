@@ -1,6 +1,9 @@
 Change history of package apcluster:
 ====================================
 
+Version 1.4.13:
+- updates and corrections of help pages
+
 Version 1.4.12:
 - changed e-mail address of maintainer
 - updated README.md and formatting of package vignette

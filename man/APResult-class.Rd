@@ -105,17 +105,16 @@ Class \code{"ExClust"}, directly.
   }
 }
 
-\author{Ulrich Bodenhofer, Andreas Kothmeier & Johannes Palme
-\email{apcluster@bioinf.jku.at}}
-\references{\url{http://www.bioinf.jku.at/software/apcluster/}
+\author{Ulrich Bodenhofer, Andreas Kothmeier, Johannes Palme}
+\references{\url{https://github.com/UBod/apcluster}
 
-Bodenhofer, U., Kothmeier, A., and Hochreiter, S. (2011)
 APCluster: an R package for affinity propagation clustering.
 \emph{Bioinformatics} \bold{27}, 2463-2464.
 DOI: \doi{10.1093/bioinformatics/btr406}.
 
 Frey, B. J. and Dueck, D. (2007) Clustering by passing messages
 between data points. \emph{Science} \bold{315}, 972-976.
+DOI: \doi{10.1126/science.1136800}.
 }
 \seealso{\code{\link{apcluster}}, \code{\link{apclusterL}}, 
   \code{\link{show-methods}}, \code{\link{plot-methods}}, 
