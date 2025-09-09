@@ -34,10 +34,12 @@
     similarity function as character string or a user provided
     function object. \code{s} may also be a sparse matrix according to
     the \pkg{Matrix} package. Internally, \code{apcluster} uses the
-    \code{\linkS4class{dgTMatrix}} class; all other sparse matrices are
+    \code{\link[Matrix:dgTMatrix-class]{Matrix:dgTMatrix-class}} class;
+    all other sparse matrices are
     cast to this class (if possible, otherwise the function quits with
     an error). If \code{s} is any other object of class
-    \code{\linkS4class{Matrix}}, \code{s} is cast to a regular matrix
+    \code{\link[Matrix:Matrix]{Matrix:Matrix}}, \code{s}
+    is cast to a regular matrix
     internally (if possible, otherwise the function quits with
     an error).} 
   \item{x}{input data to be clustered; if \code{x} is a matrix or data

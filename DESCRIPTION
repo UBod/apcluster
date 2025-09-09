@@ -1,16 +1,27 @@
 Package: apcluster
 Type: Package
 Title: Affinity Propagation Clustering
-Version: 1.4.13
-Date: 2024-04-26
+Version: 1.4.14
+Date: 2025-09-09
 Depends: R (>= 3.3.0)
 Imports: Rcpp (>= 0.11.1), methods, Matrix, stats, graphics, grDevices
 Suggests: knitr
-Author: Ulrich Bodenhofer [aut, cre],
-        Johannes Palme [ctb],
-	Chrats Melkonian [ctb],
-	Andreas Kothmeier [aut],
-	Nikola Kostic [ctb]
+Authors@R: c(person(given = "Ulrich",
+                    family = "Bodenhofer",
+                    role = c("aut", "cre"),
+                    email = "ulrich@bodenhofer.com"),
+             person(given = "Johannes",
+                    family = "Palme",
+                    role = "ctb"),
+             person(given = "Chrats",
+                    family = "Melkonian",
+                    role = "ctb"),
+             person(given = "Andreas",
+                    family = "Kothmeier",
+                    role = "aut"),
+             person(given = "Nikola",
+                    family = "Kostic",
+                    role = "ctb"))
 Maintainer: Ulrich Bodenhofer <ulrich@bodenhofer.com>
 Description: Implements Affinity Propagation clustering introduced by Frey and
 	Dueck (2007) <DOI:10.1126/science.1136800>. The algorithms are largely

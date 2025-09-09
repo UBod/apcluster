@@ -37,16 +37,16 @@
   The function \code{as.SparseSimilarityMatrix} takes a matrix argument,
   removes all diagonal elements and all values that are lower than or
   equal to the cut-off threshold \code{lower} and returns a sparse
-  matrix of class \code{\linkS4class{dgTMatrix}}.
+  matrix of class \code{\link[Matrix:dgTMatrix-class]{Matrix:dgTMatrix-class}}.
 
   If the function \code{as.DenseSimilarityMatrix} is called for a
-  sparse matrix (class \code{\linkS4class{sparseMatrix}} or any
+  sparse matrix (class \code{\link[Matrix]{sparseMatrix}} or any
   class derived from this class), a dense matrix is returned, where all
   values that were missing in the sparse matrix are replaced with
   \code{fill}.
 
   \code{as.DenseSimilarityMatrix} can also be called for dense
-  \code{\link{matrix}} and \code{\linkS4class{Matrix}} objects.
+  \code{\link{matrix}} and \code{\link[Matrix:Matrix]{Matrix:Matrix}} objects.
   In this case, \code{as.DenseSimilarityMatrix} assumes that the
   matrices have three columns that encode for a sparse matrix
   in the same way as the Matlab implementation of Frey's and Dueck's
@@ -55,7 +55,7 @@
   contains 1-based column indices, and the third column contains the
   similarity values. The same format is also accepted by
   \code{as.SparseSimilarityMatrix} to convert a sparse similarity matrix
-  of this format into a \code{\linkS4class{dgTMatrix}} object.
+  of this format into a \code{\link[Matrix:Matrix]{Matrix:Matrix}} object.
   Note that, for matrices of this format,
   \code{as.DenseSimilarityMatrix} replaces the deprectated function
   \code{sparseToFull} that was used in older versions of the package.
@@ -66,7 +66,7 @@
   or \code{DenseSimilarityMatrix}.
 }
 \value{returns a square similarity matrix in sparse format (class
-  \code{\linkS4class{dgTMatrix}} or in dense format (standard class
+  \code{\link[Matrix:dgTMatrix-class]{Matrix:dgTMatrix-class}} or in dense format (standard class
   \code{\link{matrix}}).}
 \author{Ulrich Bodenhofer}
 \references{\url{https://github.com/UBod/apcluster}
